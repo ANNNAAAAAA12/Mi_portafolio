@@ -1,0 +1,556 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+:root {
+  --negro-tinta: #171717;
+  --verde-oliva: #7A8451;
+  --rosa-empolvado: #F3C9D8;
+  --cafe-elegante: #6B4F3B;
+  --marfil: #F5F1E8;
+  --blanco: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--marfil);
+  color: var(--negro-tinta);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.app-main {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--marfil);
+}
+
+.intro-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+/* CANVAS FIJO AL VIEWPORT PARA CENTRADO PERFECTO */
+.spiral-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(10px);
+}
+
+.header-box {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  margin-bottom: 2.2rem;
+}
+
+.welcome-tag {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--verde-oliva);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.fairy-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4.8rem;
+  color: var(--negro-tinta);
+  line-height: 1.1;
+  margin: 0.2rem 0 0.8rem 0;
+  display: block;
+}
+
+.fairy-subtitle {
+  font-size: 1.1rem;
+  color: var(--cafe-elegante);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.intro-description {
+  font-size: 0.95rem;
+  color: #555555;
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.choices-grid {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 1.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 750px;
+}
+
+.choice-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid var(--rosa-empolvado);
+  border-radius: 20px;
+  padding: 2rem 1.8rem;
+  width: 310px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+}
+
+.choice-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--verde-oliva);
+  box-shadow: 0 16px 32px rgba(122, 132, 81, 0.2);
+}
+
+.card-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.choice-card h3 {
+  font-size: 1.3rem;
+  color: var(--negro-tinta);
+  margin-bottom: 0.5rem;
+}
+
+.choice-card p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+}
+
+.card-action {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--verde-oliva);
+}
+
+.profile-container {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  background: var(--rosa-empolvado);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--negro-tinta);
+  margin-bottom: 2rem;
+  transition: background 0.3s;
+}
+
+.back-btn:hover {
+  background: var(--verde-oliva);
+  color: var(--blanco);
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--rosa-empolvado);
+}
+
+.badge {
+  display: inline-block;
+  background-color: var(--verde-oliva);
+  color: var(--blanco);
+  padding: 0.3rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.music-badge {
+  background-color: var(--rosa-empolvado);
+  color: var(--negro-tinta);
+}
+
+.profile-bio {
+  margin: 1rem 0 1.5rem 0;
+  line-height: 1.6;
+  color: #444;
+}
+
+.tags {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #EAE6DF;
+  padding: 0.4rem 0.9rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+}
+/* EFECTO INTERACTIVO AL PASAR EL MOUSE SOBRE LAS ETIQUETAS */
+.tag {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tag:hover {
+  background-color: var(--verde-oliva) !important;
+  color: #ffffff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(122, 132, 81, 0.3);
+}
+
+.cv-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1.8rem;
+  padding: 1.35rem;
+  border: 1px solid rgba(122, 132, 81, 0.28);
+  border-radius: 14px;
+  background: linear-gradient(115deg, rgba(122, 132, 81, 0.12), rgba(243, 201, 216, 0.22));
+}
+
+.cv-eyebrow {
+  color: var(--verde-oliva);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.cv-section h3 {
+  margin: 0.3rem 0;
+  color: var(--negro-tinta);
+  font-size: 1.1rem;
+}
+
+.cv-section p {
+  color: #625c53;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.cv-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.cv-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--verde-oliva);
+  border-radius: 9px;
+  color: #fff;
+  background: var(--verde-oliva);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.cv-download {
+  color: var(--negro-tinta);
+  border-color: rgba(122, 132, 81, 0.4);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.cv-button:hover,
+.cv-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(55, 48, 37, 0.15);
+  outline: none;
+}
+
+.song-card {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.song-cover {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: block;
+  width: 72px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 9px;
+  background: #eae6df;
+  box-shadow: 0 3px 10px rgba(23, 23, 23, 0.12);
+}
+
+.song-card > div,
+.song-card > p {
+  grid-column: 2;
+}
+
+.contact-choice {
+  border-color: rgba(107, 79, 59, 0.24);
+}
+
+.contact-choice:hover {
+  border-color: var(--cafe-elegante);
+  box-shadow: 0 16px 32px rgba(107, 79, 59, 0.16);
+}
+
+.contact-container {
+  max-width: 900px;
+}
+
+.contact-panel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.5rem, 5vw, 3.25rem);
+  border: 1px solid rgba(122, 132, 81, 0.28);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 24px 70px rgba(55, 48, 37, 0.1);
+  backdrop-filter: blur(14px);
+  animation: contact-arrive 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.contact-heading {
+  max-width: 620px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.contact-eyebrow {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--verde-oliva);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.contact-heading h2 {
+  margin-bottom: 0.8rem;
+  color: var(--negro-tinta);
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.contact-heading p {
+  max-width: 480px;
+  margin: 0 auto;
+  color: #625c53;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.contact-link {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem;
+  border: 1px solid rgba(122, 132, 81, 0.2);
+  border-radius: 14px;
+  color: var(--negro-tinta);
+  text-decoration: none;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease;
+  animation: contact-arrive 480ms both;
+}
+
+.contact-link:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.contact-link:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.contact-link:nth-child(4) {
+  animation-delay: 210ms;
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(122, 132, 81, 0.6);
+  box-shadow: 0 12px 24px rgba(55, 48, 37, 0.1);
+  outline: none;
+}
+
+.contact-whatsapp {
+  background: rgba(122, 132, 81, 0.1);
+}
+
+.contact-email {
+  background: rgba(243, 201, 216, 0.22);
+  border-color: rgba(232, 165, 194, 0.38);
+}
+
+.contact-phone {
+  background: rgba(225, 212, 192, 0.28);
+}
+
+.contact-instagram {
+  background: rgba(232, 165, 194, 0.14);
+  border-color: rgba(232, 165, 194, 0.34);
+}
+
+.contact-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--verde-oliva);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.contact-email .contact-icon,
+.contact-instagram .contact-icon {
+  color: #9a536c;
+}
+
+.contact-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.contact-label {
+  color: #736c62;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.contact-value {
+  overflow-wrap: anywhere;
+  color: #292720;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.contact-arrow {
+  align-self: flex-start;
+  color: var(--verde-oliva);
+  font-size: 1.1rem;
+  transition: transform 220ms ease;
+}
+
+.contact-link:hover .contact-arrow,
+.contact-link:focus-visible .contact-arrow {
+  transform: translate(2px, -2px);
+}
+
+.contact-signoff {
+  margin-top: 1.7rem;
+  color: #766c60;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.65rem;
+  text-align: center;
+}
+
+.contact-signoff span {
+  color: #b66a83;
+}
+
+@keyframes contact-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .cv-section {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cv-actions {
+    width: 100%;
+  }
+
+  .cv-button {
+    flex: 1;
+  }
+
+  .contact-container {
+    padding: 2rem 1rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-link {
+    padding: 0.85rem;
+  }
+
+  .song-card {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 0.55rem 0.75rem;
+  }
+
+  .song-cover {
+    width: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-panel,
+  .contact-link {
+    animation: none;
+    transition: none;
+  }
+}
